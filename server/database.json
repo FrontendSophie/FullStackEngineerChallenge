@@ -1,0 +1,8 @@
+{
+    "dev": {
+        "driver": "mysql",
+        "database": "reviewSystem",
+        "user": "root",
+        "password": ""
+    }
+}
