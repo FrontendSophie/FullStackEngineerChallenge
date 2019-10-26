@@ -2,6 +2,7 @@ const express = require('express')
 const router = express.Router()
 
 const userCtrl = require('../controller/user')
+const reviewCtrl = require('../controller/review')
 
 const { SuccessModel, ErrorModel } = require('../model/resModel')
 
@@ -83,6 +84,33 @@ router.delete('/:id', (req, res, next) => {
     .catch(err => {
       res.json(new ErrorModel(err))
     })
+})
+
+router.get('/:id/reviewee', (req, res, next) => {
+  return reviewCtrl
+    .getAll({
+      reviewerId: req.params.id
+    })
+    .then(result => {
+      res.json(new SuccessModel(result))
+    })
+})
+
+router.post('/:id/reviewee', (req, res, next) => {
+  return reviewCtrl
+    .create({
+      revieweeId: req.body.revieweeId,
+      reviewerId: req.params.id
+    })
+    .then(result => {
+      res.json(new SuccessModel('added successfully'))
+    })
+})
+
+router.delete('/:reviewerId/reviewee/:revieweeId', (req, res, next) => {
+  return reviewCtrl.remove(req.params).then(result => {
+    res.json(new SuccessModel('deleted successfully'))
+  })
 })
 
 module.exports = router

@@ -12,7 +12,8 @@ npm install && npm start
 backend:
 
 ```
-cd server
-npm install && npm run dev
 redis-server
+
+cd server
+npm install && npm run migrate && npm run dev
 ```

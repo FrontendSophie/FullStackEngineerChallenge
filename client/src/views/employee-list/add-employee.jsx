@@ -1,9 +1,9 @@
 import React from "react";
 import PropTypes from 'prop-types';
 
-class AddForm extends React.Component {
-  constructor() {
-    super();
+class AddEmployee extends React.Component {
+  constructor(props) {
+    super(props);
     this.state = {
       username: '',
       password: '',
@@ -45,7 +45,7 @@ class AddForm extends React.Component {
 
   render() {
     return (
-      <div className="add-form">
+      <div className="employee-form">
         <input
           type="text"
           id="username"
@@ -68,8 +68,8 @@ class AddForm extends React.Component {
   }
 }
 
-AddForm.propTypes = {
-    onAdd: PropTypes.func.isRequired,
+AddEmployee.propTypes = {
+  onAdd: PropTypes.func.isRequired,
 }
 
-export default AddForm;
+export default AddEmployee;

@@ -1,10 +1,11 @@
 import React from "react";
 import ListItem from "./list-item";
-import AddForm from './add-form';
+import AddForm from './add-employee';
 
 class EmployeeList extends React.Component {
-  constructor() {
-    super();
+  constructor(props, context) {
+    super(props, context);
+
     this.state = {
       users: []
     }
@@ -31,8 +32,9 @@ class EmployeeList extends React.Component {
   render() {
     const { users } = this.state;
     if (!users) {
-      return null;
+      return null
     }
+    const filteredUsers = this.state.users.filter(user => user.role !== 0)
 
     return (
       <main className="employee-list">
@@ -45,7 +47,7 @@ class EmployeeList extends React.Component {
           <h2>Current Employees</h2>
           <ul>
             {
-              this.state.users.map(list =>
+              filteredUsers.map(list =>
                 (<ListItem list={list} key={list.id} onRefresh={this.getList} />))
             }
           </ul>

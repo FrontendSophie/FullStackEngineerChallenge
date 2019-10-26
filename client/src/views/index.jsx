@@ -1,6 +1,7 @@
 import React from "react";
 import { Redirect } from 'react-router'
 import EmployeeList from './employee-list';
+import PropTypes from 'prop-types';
 
 const Status = {
   Idle: 'Idle',
@@ -10,12 +11,22 @@ const Status = {
 }
 
 class Index extends React.Component {
-  constructor() {
-    super();
+  constructor(props, context) {
+    super(props, context);
 
     this.state = {
       status: Status.Idle,
       user: null
+    }
+  }
+
+  static childContextTypes = {
+    history: PropTypes.object
+  }
+
+  getChildContext() {
+    return {
+      history: this.props.history
     }
   }
 

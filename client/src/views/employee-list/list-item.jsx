@@ -2,8 +2,8 @@ import React from "react";
 import PropTypes from 'prop-types';
 
 class ListItem extends React.Component {
-   constructor() {
-    super();
+   constructor(props, context) {
+    super(props, context);
 
     this.state = {
       username: '',
@@ -13,6 +13,11 @@ class ListItem extends React.Component {
     this.remove = this.remove.bind(this)
     this.update = this.update.bind(this)
     this.toggleEditMode = this.toggleEditMode.bind(this)
+    this.goToReview = this.goToReview.bind(this)
+  }
+
+  static contextTypes = {
+    history: PropTypes.object,
   }
   
   async remove(id) {
@@ -56,8 +61,11 @@ class ListItem extends React.Component {
     this.setState({ [fieldName]: e.target.value })
   }
 
-  goToReviewPage() {
+  goToReview(id) {
+  } 
 
+  goToAssign(id) {
+    this.context.history.push(`/assign/${id}`)
   } 
 
   render() {
@@ -82,7 +90,8 @@ class ListItem extends React.Component {
             )
         }
         <button onClick={() => this.remove(list.id)}>remove</button>
-        <button onClick={this.goToReviewPage}>review</button>
+        <button onClick={() => this.goToAssign(list.id)}>ASSIGN</button>
+        <button onClick={() => this.goToReview(list.id)}>REVIEW</button>
       </li>
     )
   }

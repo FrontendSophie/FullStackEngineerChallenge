@@ -1,8 +1,9 @@
 import React from "react";
+import PropTypes from 'prop-types';
 
 class Login extends React.Component {
-  constructor() {
-    super();
+  constructor(props, context) {
+    super(props, context);
     this.state = {
       username: '',
       password: '',
@@ -10,6 +11,10 @@ class Login extends React.Component {
 
     this.onFieldChange = this.onFieldChange.bind(this);
     this.submit = this.submit.bind(this);
+  }
+
+  static contextTypes = {
+    router: PropTypes.object,
   }
 
   onFieldChange(e, fieldName) {
@@ -32,7 +37,7 @@ class Login extends React.Component {
     })
     const result = await response.json()
     if (result.errno === 0) {
-      window.location.assign("/")
+      this.context.router.history.push('/')
     } else {
       console.error(result.message)
     }
@@ -40,7 +45,7 @@ class Login extends React.Component {
 
   render() {
     return (
-      <section className="login-form">
+      <div className="login-form">
         <input
           type="text"
           id="username"
@@ -58,7 +63,7 @@ class Login extends React.Component {
         />
 
         <button onClick={this.submit}>Login</button>
-      </section>
+      </div>
     )
   }
 }
