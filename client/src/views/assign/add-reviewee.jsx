@@ -19,7 +19,7 @@ class AddReviewee extends React.Component {
   async submit() {
     if (this.state.revieweeId === null) return
 
-    const url = `/api/users/${this.props.currentUserId}/reviewee`
+    const url = `/api/reviews/${this.props.currentUserId}/reviewee`
     const data = {
       revieweeId: this.state.revieweeId,
     }

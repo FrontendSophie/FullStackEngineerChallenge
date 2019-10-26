@@ -37,7 +37,7 @@ class Login extends React.Component {
     })
     const result = await response.json()
     if (result.errno === 0) {
-      this.context.router.history.push('/')
+      this.props.history.push('/')
     } else {
       console.error(result.message)
     }

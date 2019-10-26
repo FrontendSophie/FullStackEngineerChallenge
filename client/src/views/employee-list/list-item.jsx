@@ -6,7 +6,7 @@ class ListItem extends React.Component {
     super(props, context);
 
     this.state = {
-      username: '',
+      username: undefined,
       isEditMode: false,
     }
 
@@ -62,6 +62,7 @@ class ListItem extends React.Component {
   }
 
   goToReview(id) {
+    this.context.history.push(`/review/${id}`)
   } 
 
   goToAssign(id) {
@@ -78,7 +79,7 @@ class ListItem extends React.Component {
           isEditMode 
             ? (
               <>
-                <input type="text" value={username ? username : list.username} onChange={e => this.onFieldChange(e, 'username')}/>
+                <input type="text" value={username === undefined ? list.username : username} onChange={e => this.onFieldChange(e, 'username')}/>
                 <button onClick={() => this.update(list.id)}>update</button>
                 <button onClick={this.toggleEditMode}>cancel</button>
               </>

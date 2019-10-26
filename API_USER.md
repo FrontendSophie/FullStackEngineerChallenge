@@ -59,6 +59,22 @@ Response:
 }
 ```
 
+- GET `/api/users/:id`
+
+Response:
+
+```
+// success
+{
+    "errno": 0,
+    "data": {
+        "id": 10,
+        "username": "sophie",
+        "role": 1
+    },,
+}
+```
+
 - POST `/api/users`
 
 ```
@@ -111,64 +127,6 @@ Response:
 {
     "errno": 0,
     message: "updated successfully"
-}
-
-// fail
-{
-    "errno": -1
-}
-```
-
-## Assign
-
-- GET `/api/users/:id/reviewee`
-
-Response:
-
-```
-// success
-{
-    "errno": 0,
-    "data": [
-        {
-            "id": 9,
-            "username": "admin",
-            "role": 0,
-        }
-    ],
-}
-```
-
-- POST `/api/users/:id/reviewee`
-
-```
-revieweeId: number
-```
-
-Response:
-
-```
-// success
-{
-    "errno": 0,
-    "message": "added successfully"
-}
-
-// fail
-{
-    "errno": -1
-}
-```
-
-- DELETE `/api/users/:reviewerId/reviewee/:revieweeId`
-
-Response:
-
-```
-// success
-{
-    "errno": 0,
-    "message": "deleted successfully"
 }
 
 // fail

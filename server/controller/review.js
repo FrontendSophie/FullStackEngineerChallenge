@@ -1,45 +1,29 @@
 const { exec } = require('../db/mysql')
 
-const create = review => {
-  let sql = `insert into reviews(reviewerId, revieweeId) values (?, ?);`
-  return exec(sql, [review.reviewerId, review.revieweeId]).then(result => {
-    return result.insertId
-  })
-}
-
-const getAll = ({ reviewerId }) => {
+const getAll = ({ reviewerId, revieweeId }) => {
   let sql = `
-    select users.id as id, username, role
-    from users
-    left join reviews ON reviews.revieweeId = users.id
-    where reviewerId = ?
+    select id, review, feedback
+    from reviews
+    where revieweeId = ? ${reviewerId ? 'and reviewerId = ?' : ''}
   `
-  return exec(sql, [reviewerId]).then(result => {
+  let params = reviewerId ? [revieweeId, reviewerId] : [revieweeId]
+  return exec(sql, params).then(result => {
     return result
   })
 }
 
-const updateFeedback = (id, user) => {
-  let sql = 'update users set username=? where id=?'
-
-  return exec(sql, [user.username, id]).then(result => {
-    return result.changedRows > 0
-  })
-}
-
-const updateContent = () => {}
-
-const remove = ({ revieweeId, reviewerId }) => {
-  let sql = 'delete from reviews where revieweeId = ? AND reviewerId = ?'
-  return exec(sql, [revieweeId, reviewerId]).then(result => {
+const update = ({ review, reviewerId, revieweeId }) => {
+  let sql = `
+    insert into reviews(review, reviewerId, revieweeId)
+    values(?, ?, ?)
+    on duplicate key update review = ?
+  `
+  return exec(sql, [review, reviewerId, revieweeId, review]).then(result => {
     return result.affectedRows > 0
   })
 }
 
 module.exports = {
-  create,
   getAll,
-  updateFeedback,
-  updateContent,
-  remove
+  update
 }

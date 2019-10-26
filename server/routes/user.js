@@ -2,13 +2,13 @@ const express = require('express')
 const router = express.Router()
 
 const userCtrl = require('../controller/user')
-const reviewCtrl = require('../controller/review')
 
 const { SuccessModel, ErrorModel } = require('../model/resModel')
 
 router.post('/login', (req, res, next) => {
-  return userCtrl.login(req.body).then(({ username, role }) => {
+  return userCtrl.login(req.body).then(({ id, username, role }) => {
     if (username) {
+      req.session.uid = id
       req.session.username = username
       req.session.role = role
       res.json(new SuccessModel())
@@ -19,11 +19,13 @@ router.post('/login', (req, res, next) => {
 })
 
 router.get('/current', (req, res, next) => {
+  const uid = req.session.uid
   const username = req.session.username
   const role = req.session.role
   res.json(
     new SuccessModel({
       user: {
+        id: uid,
         username,
         role
       }
@@ -55,9 +57,11 @@ router.post('/', (req, res, next) => {
 
 router.get('/:id', (req, res, next) => {
   return userCtrl
-    .getOne()
+    .getOne({
+      id: req.params.id
+    })
     .then(result => {
-      res.json(new SuccessModel(result))
+      res.json(new SuccessModel(result[0]))
     })
     .catch(err => {
       res.json(new ErrorModel(err))
@@ -84,33 +88,6 @@ router.delete('/:id', (req, res, next) => {
     .catch(err => {
       res.json(new ErrorModel(err))
     })
-})
-
-router.get('/:id/reviewee', (req, res, next) => {
-  return reviewCtrl
-    .getAll({
-      reviewerId: req.params.id
-    })
-    .then(result => {
-      res.json(new SuccessModel(result))
-    })
-})
-
-router.post('/:id/reviewee', (req, res, next) => {
-  return reviewCtrl
-    .create({
-      revieweeId: req.body.revieweeId,
-      reviewerId: req.params.id
-    })
-    .then(result => {
-      res.json(new SuccessModel('added successfully'))
-    })
-})
-
-router.delete('/:reviewerId/reviewee/:revieweeId', (req, res, next) => {
-  return reviewCtrl.remove(req.params).then(result => {
-    res.json(new SuccessModel('deleted successfully'))
-  })
 })
 
 module.exports = router

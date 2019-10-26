@@ -8,6 +8,7 @@ const RedisStore = require('connect-redis')(session)
 
 var indexRouter = require('./routes/index')
 const userRouter = require('./routes/user')
+const reviewRouter = require('./routes/review')
 
 var app = express()
 
@@ -37,6 +38,7 @@ app.use(
 
 app.use('/', indexRouter)
 app.use('/api/users', userRouter)
+app.use('/api/reviews', reviewRouter)
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

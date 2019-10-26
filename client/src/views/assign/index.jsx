@@ -31,7 +31,7 @@ class Assign extends React.Component {
   }
 
   async getRevieweeList(id) {
-    const getUrl = `/api/users/${id}/reviewee`
+    const getUrl = `/api/reviews/${id}/reviewee`
     
     const response = await fetch(getUrl)
     const result = await response.json()
@@ -43,7 +43,7 @@ class Assign extends React.Component {
   }
 
   async remove(reviewerId, revieweeId) {
-    const url = `/api/users/${reviewerId}/reviewee/${revieweeId}`
+    const url = `/api/reviews/${reviewerId}/reviewee/${revieweeId}`
 
     const response = await fetch(url, {
       method: 'DELETE',
