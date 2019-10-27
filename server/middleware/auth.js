@@ -5,6 +5,6 @@ module.exports = (req, res, next) => {
   if (isAdmin) {
     next()
   } else {
-    res.json(new ErrorModel('401 unauthorized '))
+    res.json(new ErrorModel('401 unauthorized'))
   }
 }

@@ -2,7 +2,7 @@ const { exec } = require('../db/mysql')
 
 const getAll = ({ reviewerId, revieweeId }) => {
   let sql = `
-    select id, review, feedback
+    select id, reviewerId, revieweeId, review, feedback
     from reviews
     where revieweeId = ? ${reviewerId ? 'and reviewerId = ?' : ''}
   `
@@ -12,13 +12,18 @@ const getAll = ({ reviewerId, revieweeId }) => {
   })
 }
 
-const update = ({ review, reviewerId, revieweeId }) => {
+const update = ({ review, feedback, reviewerId, revieweeId }) => {
   let sql = `
-    insert into reviews(review, reviewerId, revieweeId)
+    insert into reviews(
+      ${review ? 'review' : 'feedback'},
+      reviewerId,
+      revieweeId
+    )
     values(?, ?, ?)
-    on duplicate key update review = ?
+    on duplicate key update ${review ? 'review' : 'feedback'} = ?
   `
-  return exec(sql, [review, reviewerId, revieweeId, review]).then(result => {
+  let params = [review || feedback, reviewerId, revieweeId, review || feedback]
+  return exec(sql, params).then(result => {
     return result.affectedRows > 0
   })
 }

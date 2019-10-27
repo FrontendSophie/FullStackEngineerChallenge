@@ -28,7 +28,9 @@ class AddReview extends React.Component {
     })
     const result = await response.json()
     if (result.errno === 0) {
-      this.props.onUpdate()
+      if (this.props.onUpdate) {
+        this.props.onUpdate()
+      }
     } else {
       console.error(result.message)
     }
@@ -40,16 +42,17 @@ class AddReview extends React.Component {
 
   render() {
     const { reviewee, review } = this.props;
+    const defaultReview = review ? review : ''
 
     return (
       <section className="review">
-        <h2>Add Performance Review to {reviewee && reviewee.username}:</h2>
+        <h4>Review {reviewee && reviewee.username}:</h4>
         <textarea 
             name="" 
             id="" 
             cols="30" 
             rows="10"
-            value={this.state.review === undefined ? review : this.state.review}
+            value={this.state.review === undefined ? defaultReview : this.state.review}
             onChange={e => this.onFieldChange(e, 'review')}
         >
         </textarea>
@@ -61,8 +64,8 @@ class AddReview extends React.Component {
 
 AddReview.propTypes = {
   reviewee: PropTypes.object.isRequired,
-  review: PropTypes.string.isRequired,
-  onUpdate: PropTypes.func.isRequired,
+  review: PropTypes.string,
+  onUpdate: PropTypes.func,
 }
 
 export default AddReview

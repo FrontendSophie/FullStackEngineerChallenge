@@ -17,3 +17,7 @@ redis-server
 cd server
 npm install && npm run migrate && npm run dev
 ```
+
+## Assumptions
+
+- assumed no large amount of users.

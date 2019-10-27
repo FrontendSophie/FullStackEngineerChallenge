@@ -9,7 +9,7 @@ const create = review => {
 
 const getAll = ({ reviewerId }) => {
   let sql = `
-    select users.id as id, username, role
+    select users.id as id, username, role, review
     from users
     left join reviews ON reviews.revieweeId = users.id
     where reviewerId = ?

@@ -2,7 +2,7 @@ const express = require('express')
 const router = express.Router()
 
 const userCtrl = require('../controller/user')
-
+const auth = require('../middleware/auth')
 const { SuccessModel, ErrorModel } = require('../model/resModel')
 
 router.post('/login', (req, res, next) => {
@@ -11,11 +11,26 @@ router.post('/login', (req, res, next) => {
       req.session.uid = id
       req.session.username = username
       req.session.role = role
-      res.json(new SuccessModel())
+      res.json(
+        new SuccessModel({
+          user: {
+            id,
+            username,
+            role
+          }
+        })
+      )
     } else {
       res.json(new ErrorModel('login failed'))
     }
   })
+})
+
+router.post('/logout', (req, res, next) => {
+  req.session.uid = undefined
+  req.session.username = undefined
+  req.session.role = undefined
+  res.json(new SuccessModel('logout succesfully!'))
 })
 
 router.get('/current', (req, res, next) => {
@@ -24,16 +39,14 @@ router.get('/current', (req, res, next) => {
   const role = req.session.role
   res.json(
     new SuccessModel({
-      user: {
-        id: uid,
-        username,
-        role
-      }
+      id: uid,
+      username,
+      role
     })
   )
 })
 
-router.get('/', (req, res, next) => {
+router.get('/', auth, (req, res, next) => {
   return userCtrl
     .getAll()
     .then(result => {
@@ -44,7 +57,7 @@ router.get('/', (req, res, next) => {
     })
 })
 
-router.post('/', (req, res, next) => {
+router.post('/', auth, (req, res, next) => {
   return userCtrl
     .create(req.body)
     .then(result => {
@@ -55,7 +68,7 @@ router.post('/', (req, res, next) => {
     })
 })
 
-router.get('/:id', (req, res, next) => {
+router.get('/:id', auth, (req, res, next) => {
   return userCtrl
     .getOne({
       id: req.params.id
@@ -68,7 +81,7 @@ router.get('/:id', (req, res, next) => {
     })
 })
 
-router.put('/:id', (req, res, next) => {
+router.put('/:id', auth, (req, res, next) => {
   return userCtrl
     .update(req.params.id, req.body)
     .then(result => {
@@ -79,7 +92,7 @@ router.put('/:id', (req, res, next) => {
     })
 })
 
-router.delete('/:id', (req, res, next) => {
+router.delete('/:id', auth, (req, res, next) => {
   return userCtrl
     .remove(req.params.id)
     .then(result => {

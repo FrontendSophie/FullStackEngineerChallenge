@@ -19,7 +19,7 @@ class AddReviewee extends React.Component {
   async submit() {
     if (this.state.revieweeId === null) return
 
-    const url = `/api/reviews/${this.props.currentUserId}/reviewee`
+    const url = `/api/reviews/${this.props.reviewerId}/reviewee`
     const data = {
       revieweeId: this.state.revieweeId,
     }
@@ -61,7 +61,7 @@ class AddReviewee extends React.Component {
 }
 
 AddReviewee.propTypes = {
-  currentUserId: PropTypes.number.isRequired,
+  reviewerId: PropTypes.number.isRequired,
   filteredUsers: PropTypes.array.isRequired,
   onAdd: PropTypes.func.isRequired,
 }

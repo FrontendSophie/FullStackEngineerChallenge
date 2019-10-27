@@ -1,25 +1,11 @@
 import React from "react";
 import { Redirect } from 'react-router'
 import EmployeeList from './employee-list';
+import PerformanceList from './performance-list';
 import PropTypes from 'prop-types';
-
-const Status = {
-  Idle: 'Idle',
-  Loading: 'Loading',
-  Loaded: 'Loaded',
-  Error: 'Error'
-}
+import { UserContext } from '../context';
 
 class Index extends React.Component {
-  constructor(props, context) {
-    super(props, context);
-
-    this.state = {
-      status: Status.Idle,
-      user: null
-    }
-  }
-
   static childContextTypes = {
     history: PropTypes.object
   }
@@ -30,55 +16,21 @@ class Index extends React.Component {
     }
   }
 
-  async componentDidMount() {
-    this.setState({
-      status: Status.Loading
-    })
-
-    const url = '/api/users/current'
-
-    try {
-      const response = await fetch(url)
-      const result = await response.json()
-      if (result.errno === 0) {
-        this.setState({
-          status: Status.Loaded,
-          user: result.data.user
-        })
-      } else {
-        this.setState({
-          status: Status.Error
-        })
-      }
-    } catch (e) {
-      this.setState({
-        status: Status.Error
-      })
-    }
-  }
+  static contextType = UserContext;
 
   render() {
-    const { status, user } = this.state;
-    if (status === Status.Loading || status === Status.Idle) {
-      return <div><h1>Loading</h1></div>
-    }
-
-    if (status === Status.Error) {
+    const currentUser = this.context.user
+    
+    if (!currentUser.username) {
       return <Redirect to="/login" />
     }
 
-    if (!user.username) {
-      return <Redirect to="/login" />
-    }
-
-    const isAdmin = user.role === 0
+    const isAdmin = currentUser.role === 0
     if (isAdmin) {
       return <div><EmployeeList /></div>
+    } else {
+      return <div><PerformanceList /></div>
     }
-
-    return (
-      <div>Index page</div>
-    )
   }
 }
 

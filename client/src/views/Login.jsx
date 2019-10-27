@@ -1,5 +1,5 @@
 import React from "react";
-import PropTypes from 'prop-types';
+import { UserContext } from '../context';
 
 class Login extends React.Component {
   constructor(props, context) {
@@ -13,9 +13,7 @@ class Login extends React.Component {
     this.submit = this.submit.bind(this);
   }
 
-  static contextTypes = {
-    router: PropTypes.object,
-  }
+  static contextType = UserContext;
 
   onFieldChange(e, fieldName) {
     this.setState({ [fieldName]: e.target.value })
@@ -37,6 +35,7 @@ class Login extends React.Component {
     })
     const result = await response.json()
     if (result.errno === 0) {
+      this.context.updateUser(result.data.user);
       this.props.history.push('/')
     } else {
       console.error(result.message)

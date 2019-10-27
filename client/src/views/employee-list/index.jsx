@@ -1,6 +1,7 @@
 import React from "react";
 import ListItem from "./list-item";
 import AddForm from './add-employee';
+import Nav from '../../components/nav'
 
 class EmployeeList extends React.Component {
   constructor(props, context) {
@@ -37,22 +38,25 @@ class EmployeeList extends React.Component {
     const filteredUsers = this.state.users.filter(user => user.role !== 0)
 
     return (
-      <main className="employee-list">
-        <section>
-          <h2>Add Employee</h2>
-          <AddForm onAdd={this.getList}></AddForm>
-        </section>
+      <>
+        <Nav />
+        <main className="employee-list">
+          <section>
+            <h2>Add Employee</h2>
+            <AddForm onAdd={this.getList}></AddForm>
+          </section>
 
-        <section>
-          <h2>Current Employees</h2>
-          <ul>
-            {
-              filteredUsers.map(list =>
-                (<ListItem list={list} key={list.id} onRefresh={this.getList} />))
-            }
-          </ul>
-        </section>
-      </main>
+          <section>
+            <h2>Current Employees</h2>
+            <ul>
+              {
+                filteredUsers.map(list =>
+                  (<ListItem list={list} key={list.id} onRefresh={this.getList} />))
+              }
+            </ul>
+          </section>
+        </main>
+      </>
     )
   }
 }

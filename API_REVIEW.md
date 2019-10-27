@@ -12,6 +12,7 @@ Response:
         {
             "id": 9,
             "username": "admin",
+            "review": null,
             "role": 0,
         }
     ],
@@ -91,6 +92,28 @@ Response:
 ```
 reviewerId: number,
 review: string
+```
+
+Response:
+
+```
+// success
+{
+    "errno": 0,
+    "message": "updated successfully"
+}
+
+// fail
+{
+    "errno": -1
+}
+```
+
+- POST `/api/reviews/:id/feedback/`
+
+```
+reviewerId: number,
+feedback: string
 ```
 
 Response:

@@ -1,5 +1,6 @@
 const express = require('express')
 const router = express.Router()
+const auth = require('../middleware/auth')
 
 const revieweeCtrl = require('../controller/reviewee')
 const reviewCtrl = require('../controller/review')
@@ -15,7 +16,7 @@ router.get('/:id/reviewee', (req, res, next) => {
     })
 })
 
-router.post('/:id/reviewee', (req, res, next) => {
+router.post('/:id/reviewee', auth, (req, res, next) => {
   return revieweeCtrl
     .create({
       revieweeId: req.body.revieweeId,
@@ -29,7 +30,7 @@ router.post('/:id/reviewee', (req, res, next) => {
     })
 })
 
-router.delete('/:reviewerId/reviewee/:revieweeId', (req, res, next) => {
+router.delete('/:reviewerId/reviewee/:revieweeId', auth, (req, res, next) => {
   return revieweeCtrl
     .remove(req.params)
     .then(result => {
@@ -57,6 +58,21 @@ router.put('/:id', (req, res, next) => {
       revieweeId: Number.parseInt(req.params.id),
       reviewerId: Number.parseInt(req.session.uid),
       review: req.body.review
+    })
+    .then(result => {
+      res.json(new SuccessModel('updated successfully'))
+    })
+    .catch(err => {
+      res.json(new ErrorModel(err))
+    })
+})
+
+router.put('/:id/feedback', (req, res, next) => {
+  return reviewCtrl
+    .update({
+      revieweeId: Number.parseInt(req.params.id),
+      reviewerId: req.body.reviewerId,
+      feedback: req.body.feedback
     })
     .then(result => {
       res.json(new SuccessModel('updated successfully'))
