@@ -2,6 +2,7 @@ import React from "react";
 import { UserContext } from '../context';
 import paypayLogo from '../assets/images/paypay-logo.png';
 import Swal from 'sweetalert2'
+import { Redirect } from 'react-router'
 
 class Login extends React.Component {
   constructor(props, context) {
@@ -45,6 +46,12 @@ class Login extends React.Component {
   }
 
   render() {
+    const currentUser = this.context.user
+    
+    if (currentUser.username) {
+      return <Redirect to="/" />
+    }
+
     return (
       <div className="login-form flex-column position-v-h-center">
         <img src={paypayLogo} alt="icon"/>

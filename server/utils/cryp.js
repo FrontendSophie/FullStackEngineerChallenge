@@ -12,9 +12,6 @@ function genPassword(password) {
   return md5(str)
 }
 
-// const password = genPassword('12345')
-// console.log(password)
-
 module.exports = {
   genPassword
 }
