@@ -1,6 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types';
 import { UserContext } from '../../context';
+import Swal from 'sweetalert2'
 
 class AddFeedBack extends React.Component {
   static contextType = UserContext;
@@ -10,6 +11,7 @@ class AddFeedBack extends React.Component {
 
     this.state = {
       feedback: '',
+      hasChange: false,
     }
 
     this.submit = this.submit.bind(this)
@@ -34,14 +36,18 @@ class AddFeedBack extends React.Component {
     })
     const result = await response.json()
     if (result.errno === 0) {
+      Swal.fire('success', result.message, 'success')
       this.props.onUpdate()
     } else {
-      console.error(result.message)
+      Swal.fire('Oops...', 'Something went wrong', 'error')
     }
   }
 
   onFieldChange(e, fieldName) {
-    this.setState({ [fieldName]: e.target.value })
+    this.setState({ 
+      [fieldName]: e.target.value,
+      hasChange: true,
+    })
   }
 
   render() {
@@ -69,7 +75,10 @@ class AddFeedBack extends React.Component {
                 onChange={e => this.onFieldChange(e, 'feedback')}
               >
               </textarea>
-              <button onClick={() => this.submit(data.reviewerId)}>
+              <button 
+                onClick={() => this.submit(data.reviewerId)} 
+                disabled={!this.state.hasChange || !this.state.feedback}
+              >
                 <svg viewBox="0 0 20 20" className="icon-add">
                   <path
                     d="M11 9v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zM10 20c-5.523 0-10-4.477-10-10s4.477-10 10-10v0c5.523 0 10 4.477 10 10s-4.477 10-10 10v0z"

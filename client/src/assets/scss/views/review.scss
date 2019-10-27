@@ -2,6 +2,16 @@
     textarea {
         margin-right: 20px;
     }
+
+    button[disabled] {
+        background-color: var(--gray-darker);
+
+        &:hover {
+            background-color: var(--gray-darker) !important;
+            border-color: var(--gray-darker) !important;
+            color: white;
+        }
+    }
 }
 
 @media screen and (max-width: 500px) {

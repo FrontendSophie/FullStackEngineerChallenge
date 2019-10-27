@@ -32,6 +32,8 @@ class ListItem extends React.Component {
   }
 
   async update(id) {
+    if (!this.state.username) return 
+    
     this.setState({
       isEditMode: false
     })

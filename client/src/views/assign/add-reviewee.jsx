@@ -1,5 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types';
+import Swal from 'sweetalert2'
 
 class AddReviewee extends React.Component {
   constructor(props) {
@@ -17,8 +18,6 @@ class AddReviewee extends React.Component {
   }
 
   async submit() {
-    if (this.state.revieweeId === null) return
-
     const url = `/api/reviewees/${this.props.reviewerId}`
     const data = {
       revieweeId: this.state.revieweeId,
@@ -35,11 +34,13 @@ class AddReviewee extends React.Component {
     if (result.errno === 0) {
       this.props.onAdd()
     } else {
-      console.error(result.message)
+      Swal.fire('Oops...', 'Something went wrong', 'error')
     }
   }
 
   render() { 
+    const isFormInvalid = this.state.revieweeId === null
+
     return (
       <div className="reviewee-form">
         <select 
@@ -54,7 +55,7 @@ class AddReviewee extends React.Component {
           }
         </select>
 
-        <button onClick={this.submit}>
+        <button onClick={this.submit} disabled={isFormInvalid}>
           <svg viewBox="0 0 20 20" className="icon-add">
             <path
               d="M11 9v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zM10 20c-5.523 0-10-4.477-10-10s4.477-10 10-10v0c5.523 0 10 4.477 10 10s-4.477 10-10 10v0z"

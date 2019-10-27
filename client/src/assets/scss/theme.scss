@@ -137,9 +137,16 @@ svg {
     width: 24px;
     height: 24px;
     vertical-align: -7px;
+    fill: var(--primary);
+}
 
+button[disabled] {
     &:hover {
-        fill: var(--primary);
+        cursor: auto;
+    }
+
+    .icon-add {
+        fill: var(--gray-darker);
     }
 }
 

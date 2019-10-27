@@ -1,6 +1,7 @@
 import React from "react";
 import { UserContext } from '../context';
 import paypayLogo from '../assets/images/paypay-logo.png';
+import Swal from 'sweetalert2'
 
 class Login extends React.Component {
   constructor(props, context) {
@@ -39,7 +40,7 @@ class Login extends React.Component {
       this.context.updateUser(result.data.user);
       this.props.history.push('/')
     } else {
-      console.error(result.message)
+      Swal.fire('Oops...', result.message, 'error')
     }
   }
 

@@ -1,5 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types';
+import Swal from 'sweetalert2'
 
 class AddReview extends React.Component {
   constructor(props) {
@@ -7,6 +8,7 @@ class AddReview extends React.Component {
 
     this.state = {
       review: undefined,
+      hasChange: false,
     }
   }
 
@@ -28,16 +30,24 @@ class AddReview extends React.Component {
     })
     const result = await response.json()
     if (result.errno === 0) {
+      Swal.fire('success', result.message, 'success')
+      this.setState({
+        hasChange: false,
+      })
+
       if (this.props.onUpdate) {
         this.props.onUpdate()
       }
     } else {
-      console.error(result.message)
+      Swal.fire('Oops...', 'Something went wrong', 'error')
     }
   }
 
   onFieldChange(e, fieldName) {
-    this.setState({ [fieldName]: e.target.value })
+    this.setState({ 
+      [fieldName]: e.target.value,
+      hasChange: true,
+    })
   }
 
   render() {
@@ -54,7 +64,13 @@ class AddReview extends React.Component {
             onChange={e => this.onFieldChange(e, 'review')}
         >
         </textarea>
-        <button onClick={() => this.submit()} className="btn btn-primary">UPDATE</button>
+        <button 
+          onClick={() => this.submit()} 
+          className="btn btn-primary"
+          disabled={!this.state.hasChange || !this.state.review}
+        >
+          UPDATE
+        </button>
       </div>
     )
   }
