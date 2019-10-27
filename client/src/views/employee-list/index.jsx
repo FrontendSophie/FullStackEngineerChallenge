@@ -36,22 +36,26 @@ class EmployeeList extends React.Component {
       return null
     }
     const filteredUsers = this.state.users.filter(user => user.role !== 0)
+    const hasUser = filteredUsers.length > 0
 
     return (
       <>
         <Nav />
         <main className="employee-list">
-          <section>
+          <section className="employee-list__add">
             <h2>Add Employee</h2>
             <AddForm onAdd={this.getList}></AddForm>
           </section>
 
-          <section>
+          <section className="employee-list__content">
             <h2>Current Employees</h2>
-            <ul>
+            <ul className="list">
               {
                 filteredUsers.map(list =>
                   (<ListItem list={list} key={list.id} onRefresh={this.getList} />))
+              }
+              {
+                !hasUser && (<li>No record found.</li>)
               }
             </ul>
           </section>

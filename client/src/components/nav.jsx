@@ -1,5 +1,5 @@
 import React from 'react'
-import PaypayIcon from '../images/paypay-icon.png'
+import PaypayIcon from '../assets/images/paypay-icon.png'
 import { UserContext } from '../context';
 
 class Nav extends React.Component {
@@ -23,12 +23,13 @@ class Nav extends React.Component {
     const currentUser = this.context.user
 
     return (
-      <nav>
+      <nav className="flex-v-h-center">
         <img src={PaypayIcon} alt="paypay-icon"/>
+        <h2>PayPay Peformance Review System</h2>
         { currentUser && (
           <>
-            <span>welcome, {currentUser.username}</span>
-            <button onClick={this.logout}>Logout</button>
+            <span>welcome, <strong>{currentUser.username}</strong>!</span>
+            <button onClick={this.logout} className="btn-text">Logout</button>
           </>
         )}
       </nav>

@@ -1,7 +1,7 @@
 import React from 'react';
 import { BrowserRouter } from 'react-router-dom'
 import Routes from './config/router'
-import './App.css';
+import './App.scss';
 
 import { UserContext } from './context';
 

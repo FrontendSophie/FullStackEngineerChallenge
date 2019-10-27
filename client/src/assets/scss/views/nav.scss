@@ -1,0 +1,29 @@
+nav {
+    padding: 12px 20px;
+    background-color: var(--black);
+
+    color: white;
+
+    img {
+        width: 20px;
+    }
+
+    h2 {
+        margin-left: 6px;
+        flex: 1;
+    }
+
+    span {
+        margin-right: 20px;
+
+        font-size: var(--text-xl);
+
+        strong {
+            font-size: var(--text-2xl);
+        }
+    }
+
+    button {
+        padding-top: 4px;
+    }
+}

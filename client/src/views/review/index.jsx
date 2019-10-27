@@ -68,29 +68,42 @@ class Review extends React.Component {
 
   render() {
     const { reviewee, myReview, reviews } = this.state;
+    const hasReview = reviews.length > 0
 
     return (
       <Auth>
         <Nav />
         {reviewee && (
           <main className="review">
-            <AddReview 
-              reviewee={reviewee} 
-              review={myReview}
-              onUpdate={this.getAllReviews}
-            ></AddReview>
-
+            <section className="add-review">
+              <h2>Add Reviews to <span>{reviewee && reviewee.username}</span>:</h2>
+              <AddReview 
+                reviewee={reviewee} 
+                review={myReview}
+                onUpdate={this.getAllReviews}
+              ></AddReview>
+            </section>
+            
             <section>
-              <h2>{reviewee.username}'s Performance Reviews</h2>
-              <ul>
+              <h2><span>{reviewee.username}</span>'s Performance Reviews</h2>
+              <ul className="list">
                 {
                   reviews.map(item => (
                     <li key={item.id}>
-                      <span>review: {item.review}</span>
-                      <span>feedback: {item.feedback}</span>
+                      <span className="review-line">
+                        <strong>review:</strong> 
+                        {item.review}
+                      </span>
+                      <span className="review-line">
+                        <strong>feedback:</strong>
+                        {item.feedback ? item.feedback : 'currently no feedback.'}
+                      </span>
                     </li>
                   )) 
                 } 
+                {
+                  !hasReview && (<li>No record found.</li>)
+                }
               </ul>
             </section>
           </main>

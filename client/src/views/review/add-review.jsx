@@ -41,23 +41,21 @@ class AddReview extends React.Component {
   }
 
   render() {
-    const { reviewee, review } = this.props;
+    const { review } = this.props;
     const defaultReview = review ? review : ''
 
     return (
-      <section className="review">
-        <h4>Review {reviewee && reviewee.username}:</h4>
+      <div className="add-review flex-v-center">
         <textarea 
-            name="" 
-            id="" 
-            cols="30" 
-            rows="10"
+            className="flex-1" 
+            rows="4"
             value={this.state.review === undefined ? defaultReview : this.state.review}
+            placeholder="Write your review..."
             onChange={e => this.onFieldChange(e, 'review')}
         >
         </textarea>
-        <button onClick={() => this.submit()}>UPDATE</button>
-      </section>
+        <button onClick={() => this.submit()} className="btn btn-primary">UPDATE</button>
+      </div>
     )
   }
 }

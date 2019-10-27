@@ -48,27 +48,38 @@ class AddFeedBack extends React.Component {
     const { data } = this.props;
 
     return (
-      <div className="feedback">
-        <p>Review: {data.review}</p>
+      <li className="feedback">
+        <span className="review-line">
+          <strong>review:</strong> 
+          {data.review}
+        </span>
         {
           data.feedback ? (
-            <p>My feedback: {data.feedback}</p>
+            <span className="review-line">
+              <strong>feedback:</strong> 
+              {data.feedback}
+            </span>
           ) : (
-            <>
+            <span className="flex-v-center">
               <textarea 
-                name="" 
-                id="" 
-                cols="30" 
-                rows="10"
+                className="flex-1"
+                rows="2"
+                placeholder="Write your feedback..."
                 value={this.state.feedback}
                 onChange={e => this.onFieldChange(e, 'feedback')}
               >
               </textarea>
-              <button onClick={() => this.submit(data.reviewerId)}>ADD</button>
-            </>
+              <button onClick={() => this.submit(data.reviewerId)}>
+                <svg viewBox="0 0 20 20" className="icon-add">
+                  <path
+                    d="M11 9v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zM10 20c-5.523 0-10-4.477-10-10s4.477-10 10-10v0c5.523 0 10 4.477 10 10s-4.477 10-10 10v0z"
+                  ></path>
+                </svg>
+              </button>
+            </span>
           )
         }
-      </div>
+      </li>
     )
   }
 }

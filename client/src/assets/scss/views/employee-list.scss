@@ -1,0 +1,16 @@
+.employee-list {
+    &__add {
+        input {
+            flex: 1;
+            margin-right: 20px;
+        }
+    }
+
+    &__content {
+
+        .btn-assign,
+        .btn-remove {
+            margin-right: 10px;
+        }
+    }
+}

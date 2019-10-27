@@ -1,0 +1,16 @@
+@import "assets/scss/theme";
+@import "assets/scss/layout";
+
+@import "assets/scss/views/login";
+@import "assets/scss/views/nav";
+@import "assets/scss/views/employee-list";
+@import "assets/scss/views/assign";
+@import "assets/scss/views/review";
+@import "assets/scss/views/performance-list";
+
+.App {
+  position: relative;
+
+  min-height: 100vh;
+  background-color: var(--gray);
+}

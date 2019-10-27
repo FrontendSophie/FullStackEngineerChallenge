@@ -56,26 +56,28 @@ class PerformanceList extends React.Component {
     return (
       <>
         <Nav/>
-        <main className="employee-list">
+        <main className="performance-list">
           {
             hasReviewee && (
               <section>
                 <h2>Add Performance Reviews</h2>
                 {
                   reviewees.map(reviewee => (
-                    <AddReview
-                      reviewee={reviewee}
-                      review={reviewee.review}
-                      key={reviewee.id}
-                    ></AddReview>
+                    <section key={reviewee.id}>
+                      <h3 className="review-title">To <span>{reviewee.username}</span></h3>
+                      <AddReview
+                        reviewee={reviewee}
+                        review={reviewee.review}
+                      ></AddReview>
+                    </section>
                   ))
                 }
               </section>)
           }
 
           <section>
-            <h2>Add FeedBack</h2>
-            <ul>
+            <h2>Add FeedBacks</h2>
+            <ul className="list">
               {
                 reviews.map(review =>
                   (<AddFeedBack data={review} key={review.id}

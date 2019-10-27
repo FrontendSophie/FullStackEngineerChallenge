@@ -1,0 +1,15 @@
+.performance-list {
+    .review-title {
+        margin-bottom: 4px;
+
+        span {
+            font-size: var(--text-2xl);
+        }
+    }
+
+    .feedback {
+        textarea {
+            margin-right: 14px;
+        }
+    }
+}

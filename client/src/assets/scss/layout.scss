@@ -1,0 +1,31 @@
+.flex-column {
+    display: flex;
+    flex-direction: column;
+}
+
+.flex-v-h-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.flex-v-center {
+    display: flex;
+    align-items: center;
+}
+
+.flex-h-center {
+    display: flex;
+    justify-content: center;
+}
+
+.flex-1 {
+    flex: 1;
+}
+
+.position-v-h-center {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}

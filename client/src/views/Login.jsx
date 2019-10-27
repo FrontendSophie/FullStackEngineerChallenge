@@ -1,5 +1,6 @@
 import React from "react";
 import { UserContext } from '../context';
+import paypayLogo from '../assets/images/paypay-logo.png';
 
 class Login extends React.Component {
   constructor(props, context) {
@@ -44,7 +45,9 @@ class Login extends React.Component {
 
   render() {
     return (
-      <div className="login-form">
+      <div className="login-form flex-column position-v-h-center">
+        <img src={paypayLogo} alt="icon"/>
+        <h1>Performance Review System</h1>
         <input
           type="text"
           id="username"
@@ -61,7 +64,7 @@ class Login extends React.Component {
           placeholder="password"
         />
 
-        <button onClick={this.submit}>Login</button>
+        <button className="btn btn-primary" onClick={this.submit}>Login</button>
       </div>
     )
   }
