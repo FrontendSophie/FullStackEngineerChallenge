@@ -52,7 +52,8 @@ class PerformanceList extends React.Component {
   render() {
     const { reviewees, reviews } = this.state
     const hasReviewee = reviewees.length > 0
-    const hasReview = reviews.length > 0
+    const filteredReviews = reviews.filter(item => item.review)
+    const hasReview = filteredReviews.length > 0
 
     return (
       <>
@@ -80,13 +81,12 @@ class PerformanceList extends React.Component {
             <h2>Add FeedBacks</h2>
             <ul className="list">
               {
-                reviews.map(review =>
-                  (<AddFeedBack data={review} key={review.id}
-                    onUpdate={() => this.getAllReviews()}
-                  />))
-              }
-              {
-                !hasReview && (<li>No record found.</li>)
+                hasReview 
+                  ? filteredReviews.map(review =>
+                      (<AddFeedBack data={review} key={review.id}
+                        onUpdate={() => this.getAllReviews()}
+                      />)) 
+                  : (<li>No record found.</li>)
               }
             </ul>
           </section>

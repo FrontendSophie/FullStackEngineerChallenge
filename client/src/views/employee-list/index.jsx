@@ -51,11 +51,10 @@ class EmployeeList extends React.Component {
             <h2>Current Employees</h2>
             <ul className="list">
               {
-                filteredUsers.map(list =>
-                  (<ListItem list={list} key={list.id} onRefresh={this.getList} />))
-              }
-              {
-                !hasUser && (<li>No record found.</li>)
+                hasUser  
+                  ? filteredUsers.map(list =>
+                      (<ListItem list={list} key={list.id} onRefresh={this.getList} />))
+                  : (<li>No record found.</li>)
               }
             </ul>
           </section>

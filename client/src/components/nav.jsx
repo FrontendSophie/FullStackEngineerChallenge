@@ -1,6 +1,7 @@
 import React from 'react'
 import PaypayIcon from '../assets/images/paypay-icon.png'
 import { UserContext } from '../context';
+import { Link } from 'react-router-dom'
 
 class Nav extends React.Component {
   static contextType = UserContext;
@@ -19,20 +20,18 @@ class Nav extends React.Component {
     }
   }
 
-  goToHome() {
-    window.location.assign('/')
-  }
-
   render() {
     const currentUser = this.context.user
 
     return (
       <nav className="flex-v-h-center">
-        <img src={PaypayIcon} onClick={this.goToHome} alt="paypay-icon" className="logo"/>
-        <h2 onClick={this.goToHome}>PayPay Peformance Review System</h2>
+        <Link to="/">
+          <img src={PaypayIcon} alt="paypay-icon" className="logo"/>
+          <span className="logo-text">PayPay Peformance Review System</span>
+        </Link>
         { currentUser && (
           <div>
-            <span>welcome, <strong>{currentUser.username}</strong>!</span>
+            <span className="welcome-text">welcome, <strong>{currentUser.username}</strong>!</span>
             <button onClick={this.logout} className="btn-text">Logout</button>
           </div>
         )}

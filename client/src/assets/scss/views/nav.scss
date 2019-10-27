@@ -4,21 +4,21 @@ nav {
 
     color: white;
 
-    img,
-    h2 {
-        cursor: pointer;
-    }
-
-    img {
-        width: 20px;
-    }
-
-    h2 {
-        margin-left: 6px;
+    a {
         flex: 1;
+
+        color: white;
+        font-size: var(--text-2xl);
+        font-weight: bold;
+
+        img {
+            width: 20px;
+            vertical-align: -5px;
+            margin-right: 6px;
+        }
     }
 
-    span {
+    .welcome-text {
         margin-right: 20px;
 
         font-size: var(--text-xl);
@@ -34,7 +34,7 @@ nav {
         padding: 12px 10px;
         justify-content: space-between !important;
 
-        h2 {
+        .logo-text {
             display: none;
         }
 

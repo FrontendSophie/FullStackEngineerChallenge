@@ -68,7 +68,8 @@ class Review extends React.Component {
 
   render() {
     const { reviewee, myReview, reviews } = this.state;
-    const hasReview = reviews.length > 0
+    const filteredReviews = reviews.filter(item => item.review)
+    const hasReview = filteredReviews.length > 0
 
     return (
       <Auth>
@@ -88,22 +89,21 @@ class Review extends React.Component {
               <h2><span>{reviewee.username}</span>'s Performance Reviews</h2>
               <ul className="list">
                 {
-                  reviews.map(item => (
-                    <li key={item.id}>
-                      <span className="review-line">
-                        <strong>review:</strong> 
-                        {item.review}
-                      </span>
-                      <span className="review-line">
-                        <strong>feedback:</strong>
-                        {item.feedback ? item.feedback : 'currently no feedback.'}
-                      </span>
-                    </li>
-                  )) 
+                  hasReview 
+                    ? filteredReviews.map(item => (
+                        <li key={item.id}>
+                          <span className="review-line">
+                            <strong>review:</strong> 
+                            {item.review}
+                          </span>
+                          <span className="review-line">
+                            <strong>feedback:</strong>
+                            {item.feedback ? item.feedback : 'currently no feedback.'}
+                          </span>
+                        </li>
+                      )) 
+                    : (<li>No record found.</li>)
                 } 
-                {
-                  !hasReview && (<li>No record found.</li>)
-                }
               </ul>
             </section>
           </main>

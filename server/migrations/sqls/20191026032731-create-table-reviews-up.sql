@@ -6,4 +6,4 @@ CREATE TABLE `reviews` (
   `feedback` longtext DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `review_relation` (`reviewerId`,`revieweeId`)
-) ENGINE=InnoDB AUTO_INCREMENT=81 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
