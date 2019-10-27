@@ -100,7 +100,7 @@ class ListItem extends React.Component {
               </>
             ) : (
               <>
-                <span className="flex-1">{list.username}</span>
+                <span className="flex-1 employee-name">{list.username}</span>
                 <button onClick={this.toggleEditMode}>
                   <svg viewBox="0 0 32 32">
                     <path

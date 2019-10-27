@@ -26,7 +26,7 @@ class PerformanceList extends React.Component {
 
   async getRevieweeList() {
     const currentUser = this.context.user
-    const getUrl = `/api/reviews/${currentUser.id}/reviewee`
+    const getUrl = `/api/reviewees/${currentUser.id}`
 
     const response = await fetch(getUrl)
     const result = await response.json()

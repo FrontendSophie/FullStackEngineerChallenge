@@ -1,65 +1,6 @@
-## Assign Reviewee
-
-- GET `/api/reviews/:id/reviewee`
-
-Response:
-
-```
-// success
-{
-    "errno": 0,
-    "data": [
-        {
-            "id": 9,
-            "username": "admin",
-            "review": null,
-            "role": 0,
-        }
-    ],
-}
-```
-
-- POST `/api/reviews/:id/reviewee`
-
-```
-revieweeId: number
-```
-
-Response:
-
-```
-// success
-{
-    "errno": 0,
-    "message": "added successfully"
-}
-
-// fail
-{
-    "errno": -1
-}
-```
-
-- DELETE `/api/reviews/:reviewerId/reviewee/:revieweeId`
-
-Response:
-
-```
-// success
-{
-    "errno": 0,
-    "message": "deleted successfully"
-}
-
-// fail
-{
-    "errno": -1
-}
-```
-
 ## Review
 
-- GET `/api/reviews/:id?reviewerId`
+- GET `/api/reviews/:revieweeId?reviewerId`
 
 Response:
 
@@ -87,7 +28,7 @@ Response:
 }
 ```
 
-- PUT `/api/reviews/:id`
+- PUT `/api/reviews/:revieweeId`
 
 ```
 reviewerId: number,
@@ -109,7 +50,7 @@ Response:
 }
 ```
 
-- POST `/api/reviews/:id/feedback/`
+- POST `/api/reviews/:revieweeId/feedback/`
 
 ```
 reviewerId: number,
