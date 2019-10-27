@@ -1,0 +1,7 @@
+{
+    "env": {
+        "DEFAULT_URL": "http://localhost:3000/",
+        "username": "admin",
+        "password": 123456
+    }
+}

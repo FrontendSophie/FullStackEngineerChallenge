@@ -87,12 +87,12 @@ class ListItem extends React.Component {
                   value={username === undefined ? list.username : username} 
                   onChange={e => this.onFieldChange(e, 'username')}
                 />
-                <button onClick={() => this.update(list.id)}>
+                <button onClick={() => this.update(list.id)} className="btn-update">
                   <svg viewBox="0 0 20 20">
                     <path d="M0 11l2-2 5 5 11-11 2 2-13 13z"></path>
                   </svg>
                 </button>
-                <button onClick={this.toggleEditMode}>
+                <button onClick={this.toggleEditMode} className="btn-toggle-edit">
                   <svg viewBox="0 0 20 20">
                     <path
                       d="M10 8.586l-7.071-7.071-1.414 1.414 7.071 7.071-7.071 7.071 1.414 1.414 7.071-7.071 7.071 7.071 1.414-1.414-7.071-7.071 7.071-7.071-1.414-1.414-7.071 7.071z"
@@ -121,7 +121,7 @@ class ListItem extends React.Component {
           </svg>
         </button>
         <button onClick={() => this.goToAssign(list.id)} className="btn-outlined btn-secondary btn-assign">ASSIGN</button>
-        <button onClick={() => this.goToReview(list.id)} className="btn-outlined btn-primary">REVIEW</button>
+        <button onClick={() => this.goToReview(list.id)} className="btn-outlined btn-primary btn-review">REVIEW</button>
       </li>
     )
   }

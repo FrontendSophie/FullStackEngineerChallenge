@@ -28,7 +28,7 @@ class Nav extends React.Component {
 
     return (
       <nav className="flex-v-h-center">
-        <img src={PaypayIcon} onClick={this.goToHome} alt="paypay-icon"/>
+        <img src={PaypayIcon} onClick={this.goToHome} alt="paypay-icon" className="logo"/>
         <h2 onClick={this.goToHome}>PayPay Peformance Review System</h2>
         { currentUser && (
           <div>

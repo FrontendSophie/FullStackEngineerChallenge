@@ -1,5 +1,6 @@
 import React from "react";
 import PropTypes from 'prop-types';
+import Swal from 'sweetalert2'
 
 class AddEmployee extends React.Component {
   constructor(props) {
@@ -33,13 +34,14 @@ class AddEmployee extends React.Component {
     })
     const result = await response.json()
     if (result.errno === 0) {
+        Swal.fire('success', result.message, 'success')
         this.setState ({
             username: '',
             password: '',
         })
         this.props.onAdd()
     } else {
-      console.error(result.message)
+      Swal.fire('Oops...', 'Something went wrong', 'error')
     }
   }
 
