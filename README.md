@@ -29,7 +29,7 @@ password: 123456
 
 ## Tech Stack
 
-frontend(create-react-app): React, React-router, sass
+frontend(create-react-app): React, React-router, sass  
 backend(express-generator): Express, MySQL, redis
 
 ## Assumptions
@@ -37,3 +37,4 @@ backend(express-generator): Express, MySQL, redis
 - assumed only admin can create user and view feedbacks.
 - assumed no large amount of users.
 - assumed all the reviews are anonymous.
+- assumed feedback cannot no longer be modified after added.
