@@ -31,10 +31,10 @@ class Nav extends React.Component {
         <img src={PaypayIcon} onClick={this.goToHome} alt="paypay-icon"/>
         <h2>PayPay Peformance Review System</h2>
         { currentUser && (
-          <>
+          <div>
             <span>welcome, <strong>{currentUser.username}</strong>!</span>
             <button onClick={this.logout} className="btn-text">Logout</button>
-          </>
+          </div>
         )}
       </nav>
     )

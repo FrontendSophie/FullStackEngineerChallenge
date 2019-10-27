@@ -1,4 +1,6 @@
-# Full Stack Engineer Challenge
+# PayPay Performance Review System
+
+![system](./system.png)
 
 ## Setup
 
@@ -17,6 +19,11 @@ redis-server
 cd server
 npm install && npm run migrate && npm run dev
 ```
+
+## Tech Stack
+
+frontend(create-react-app): React, React-router, sass  
+backend(express-generator): Express, MySQL, redis
 
 ## Assumptions
 

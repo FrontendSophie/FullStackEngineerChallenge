@@ -18,3 +18,20 @@
         }
     }
 }
+
+@media screen and (max-width: 500px) {
+    .employee-list {
+        &__add {
+            input {
+                width: 100%;
+                margin-right: 10px;
+            }
+        }
+
+        &__content {
+            input {
+                width: 100%;
+            }
+        }
+    }
+}

@@ -17,3 +17,9 @@
         font-size: var(--text-2xl);
     }
 }
+
+@media screen and (max-width: 500px) {
+    .login-form {
+        width: calc(100% - 20px);
+    }
+}

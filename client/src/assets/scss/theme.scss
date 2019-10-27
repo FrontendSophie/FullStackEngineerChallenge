@@ -19,7 +19,7 @@ body {
 
 main {
     max-width: 800px;
-    margin: 20px auto;
+    margin: 40px auto 0;
 }
 
 section {
@@ -37,6 +37,7 @@ section {
 
 /* form */
 input,
+textarea,
 .btn-primary,
 .btn-secondary {
     padding: 8px 6px;
@@ -180,5 +181,32 @@ ul.list {
         strong {
             margin-bottom: 4px;
         }
+    }
+}
+
+
+@media screen and (max-width: 500px) {
+    section {
+        width: calc(100% - 20px);
+        margin: 0 10px 40px;
+
+        section {
+            width: 100%;
+            margin: 0 0 40px;
+        }
+    }
+
+    ul.list {
+        li {
+            padding: 10px;
+
+            svg {
+                visibility: visible;
+            }
+        }
+    }
+
+    main {
+        margin: 20px auto 0;
     }
 }

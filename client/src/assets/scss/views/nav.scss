@@ -22,8 +22,19 @@ nav {
             font-size: var(--text-2xl);
         }
     }
+}
 
-    button {
-        padding-top: 4px;
+@media screen and (max-width: 500px) {
+    nav {
+        padding: 12px 10px;
+        justify-content: space-between !important;
+
+        h2 {
+            display: none;
+        }
+
+        span {
+            margin-right: 10px;
+        }
     }
 }
